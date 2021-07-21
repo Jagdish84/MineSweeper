@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>
+        MineSweeper
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="initGame()">
+    <h1>Score Board</h1>
+    <h2>Current Score:</h2>
+    <h3 class="timer">Timer: <span>00:00</span></h3>
+
+    <div class="modal">
+        <h2 class="game-over-txt"></h2>
+    </div>
+    <table>
+        <tbody class="board"></tbody>
+    </table>
+    <div><span class="marked"></span> <span class="shown"></span></div>
+
+    <button class="levels easy" onclick="changeLevel(4)">Beginner (4X4)</button>
+    <button class="levels medium" onclick="changeLevel(8)">Medium (8X8)</button>
+    <button class="levels hard" onclick="changeLevel(12)">Expert (12X12)</button>
+
+</body>
+
+<script src="js/main.js"></script>
+
+</html>
