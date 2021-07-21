@@ -31,6 +31,7 @@ function initGame() {
     gGame.totalNoMines = gLevel.size ** 2 - gLevel.mines;
     clearInterval(gTimerInterval);
     clearTimer();
+    clearScores()
     gBoard = buildBoard();
     renderBoard(gBoard);
     getModal(false, false);
@@ -179,12 +180,12 @@ function getRandomInt(min, max) {
 
 function renderTimer() {
     var elTimer = document.querySelector('.timer');
-    elTimer.innerHTML = `Timer: ${(Date.now() - gStartTime) / 1000} sec`
+    elTimer.innerHTML = ` ${(Date.now() - gStartTime) / 1000} sec`
 }
 
 function clearTimer() {
     var elTimer = document.querySelector('.timer');
-    elTimer.innerHTML = ''
+    elTimer.innerHTML = '';
 }
 
 function clearScores() {
@@ -270,6 +271,5 @@ function countMarkedMines(board) {
             }
         }
     }
-    console.log(countMarkedMines);
     return countMarkedMines;
 }
