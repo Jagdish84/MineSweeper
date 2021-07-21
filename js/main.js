@@ -6,7 +6,7 @@ var FLAG = '🚩';
 
 var gTimerId;
 var gStartTime = Date.now()
-var gTimerInterval;
+// var gTimerInterval;
 var gFirstCellClick = 0;
 
 var gLevel = {
@@ -19,17 +19,19 @@ var gGame = {
     totalNoMines: gLevel.size ** 2 - gLevel.mines,
     shownCount: 0,
     markedCount: 0,
-    secsPassed: 0
+    secsPassed: 0,
+    timerInterval:0
 }
 
 var gBoard;
 
 function initGame() {
+    gStartTime = Date.now()
     gGame.isOn = true;
     gGame.shownCount = 0;
     gGame.markedCount = 0;
     gGame.totalNoMines = gLevel.size ** 2 - gLevel.mines;
-    clearInterval(gTimerInterval);
+    // clearInterval(gTimerInterval);
     clearTimer();
     clearScores()
     gBoard = buildBoard();
@@ -97,7 +99,7 @@ function cellClicked(elCell) {
     var currCell = gBoard[currLocation.i][currLocation.j];
     var elShown = document.querySelector('.shown');
     if (gFirstCellClick === 0) {
-        gTimerInterval = setInterval(renderTimer, 100);
+        gGame.timerInterval = setInterval(renderTimer, 100);
         placeMines(gLevel.size, gLevel.mines);
         setMinesNegsCount()
         renderBoard(gBoard);
@@ -180,12 +182,13 @@ function getRandomInt(min, max) {
 
 function renderTimer() {
     var elTimer = document.querySelector('.timer');
-    elTimer.innerHTML = ` ${(Date.now() - gStartTime) / 1000} sec`
+    elTimer.innerHTML = `Timer: ${(Date.now() - gStartTime) / 1000} sec`
 }
 
 function clearTimer() {
     var elTimer = document.querySelector('.timer');
     elTimer.innerHTML = '';
+    clearInterval(gGame.timerInterval);
 }
 
 function clearScores() {
@@ -216,8 +219,8 @@ function gameOver(isVictory) {
     gGame.shownCount = 0;
     gGame.markedCount = 0;
     getModal(true, isVictory);
-    clearInterval(gTimerInterval);
-    clearScores();
+    clearInterval(timerInterval);
+    // clearScores();
 }
 
 function getModal(showModal, isVictory) {
