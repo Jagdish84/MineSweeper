@@ -6,7 +6,6 @@ var FLAG = '🚩';
 
 var gTimerId;
 var gStartTime = Date.now()
-// var gTimerInterval;
 var gFirstCellClick = 0;
 
 var gLevel = {
@@ -20,7 +19,7 @@ var gGame = {
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0,
-    timerInterval:0
+    timerInterval: 0
 }
 
 var gBoard;
@@ -31,7 +30,6 @@ function initGame() {
     gGame.shownCount = 0;
     gGame.markedCount = 0;
     gGame.totalNoMines = gLevel.size ** 2 - gLevel.mines;
-    // clearInterval(gTimerInterval);
     clearTimer();
     clearScores()
     gBoard = buildBoard();
