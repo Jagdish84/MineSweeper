@@ -16,7 +16,7 @@ var gLevel = {
 
 var gGame = {
     isOn: false,
-    totalCells: gLevel.size ** 2,
+    totalNoMines: gLevel.size ** 2 - gLevel.mines,
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0
@@ -28,6 +28,7 @@ function initGame() {
     gGame.isOn = true;
     gGame.shownCount = 0;
     gGame.markedCount = 0;
+    gGame.totalNoMines = gLevel.size ** 2 - gLevel.mines;
     clearInterval(gTimerInterval);
     clearTimer();
     gBoard = buildBoard();
@@ -94,17 +95,18 @@ function cellClicked(elCell) {
     var currLocation = { i: +elCell.dataset.i, j: +elCell.dataset.j };
     var currCell = gBoard[currLocation.i][currLocation.j];
     var elShown = document.querySelector('.shown');
-    gFirstCellClick++
-    if (gFirstCellClick === 1) {
+    if (gFirstCellClick === 0) {
         gTimerInterval = setInterval(renderTimer, 100);
         placeMines(gLevel.size, gLevel.mines);
         setMinesNegsCount()
         renderBoard(gBoard);
     }
-
+    gFirstCellClick++
+    console.log(gGame.totalNoMines);
     if (!currCell.isShown) {
         currCell.isShown = true;
         gGame.shownCount++;
+        gGame.totalNoMines--;
         elShown.innerHTML = `Shown Cells: ${gGame.shownCount}`;
         renderBoard(gBoard);
     }
@@ -113,12 +115,14 @@ function cellClicked(elCell) {
         showMines(gBoard);
         gameOver(false);
     }
+    checkGameOver(gBoard, gLevel.mines);
 }
 
 function cellMarked(event, elCell) {
     var i = +elCell.dataset.i;
     var j = +elCell.dataset.j;
     var elMarked = document.querySelector('.marked');
+
     if (!gBoard[i][j].isMarked) {
         gBoard[i][j].isMarked = true;
         gGame.markedCount++;
@@ -131,22 +135,11 @@ function cellMarked(event, elCell) {
         gBoard[i][j].isShown = false;
     }
     event.preventDefault();
-    if (gFirstCellClick === 1) {
-        gTimerInterval = setInterval(renderTimer, 100);
-        placeMines(gLevel.size, gLevel.mines);
-        setMinesNegsCount();
-    }
     renderBoard(gBoard)
 }
 
 function checkGameOver(board, mines) {
-    var countNoMines = 0;
-    for (var i = 0; i < board.length; i++) {
-        for (var j = 0; j < board.length; j++) {
-            countNoMines++
-        }
-    }
-    if (countNoMines === gGame.totalCells - gGame.mines) {
+    if (gGame.totalNoMines === 0) {
         gameOver(true);
     }
 }
