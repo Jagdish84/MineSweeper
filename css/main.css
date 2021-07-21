@@ -85,6 +85,13 @@ table {
     color: white;
 }
 
+.timer{
+    position: absolute;
+    top: 200px;
+    right: 100px;
+    width: 300px;  
+}
+
 .shown {
     position: absolute;
     display: inline-block;
