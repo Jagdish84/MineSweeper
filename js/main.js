@@ -248,29 +248,3 @@ function showMines(board) {
     }
     renderBoard(board)
 }
-
-function countShownCells(board) {
-    var countShownCell = 0;
-    for (var i = 0; i < board.length; i++) {
-        for (var j = 0; j < board.length; j++) {
-            var currCell = board[i][j];
-            if (currCell.isShown = true) {
-                countShownCell++;
-            }
-        }
-    }
-    return countShownCell;
-}
-
-function countMarkedMines(board) {
-    var countMarkedMines = 0;
-    for (var i = 0; i < board.length; i++) {
-        for (var j = 0; j < board.length; j++) {
-            var currCell = board[i][j];
-            if (currCell.isMine === true && currCell.isMarked === true) {
-                countMarkedMines++;
-            }
-        }
-    }
-    return countMarkedMines;
-}
