@@ -155,6 +155,8 @@ function cellMarked(event, elCell) {
     var j = +elCell.dataset.j;
     var elMarked = document.querySelector('.marked');
 
+    if(gBoard[i][j].isShown && !gBoard[i][j].isMarked) return;
+
     if (!gBoard[i][j].isMarked) {
         gBoard[i][j].isMarked = true;
         gGame.markedCount++;
@@ -166,8 +168,9 @@ function cellMarked(event, elCell) {
         elMarked.innerHTML = `Marked Cells: ${gGame.markedCount}`;
         gBoard[i][j].isShown = false;
     }
-    
+
     event.preventDefault();
+    // if(gBoard[i][j].isShown) return;
     renderBoard(gBoard)
 }
 
@@ -324,25 +327,25 @@ function getEmptyNegsLocations(pos) {
     return locations;
 }
 
-function resetLives(){
+function resetLives() {
     var elLive = document.querySelector('.lives-container');
     elLive.innerHTML = '';
     elLive.innerHTML += 'Lives: <span class="live1"><img src="./img/heart.png" alt="heart.png"></span><span class="live2"><img src="./img/heart.png" alt="heart.png"></span><span class="live3"><img src="./img/heart.png"alt="heart.png"/></span>';
 }
 
-function renderLives(){
+function renderLives() {
     var elLive = document.querySelector(`.live${gGame.livesCount}`);
     elLive.remove();
     gGame.livesCount--;
 }
 
-function resetSmiley(){
+function resetSmiley() {
     var elLive = document.querySelector('.smiley');
     // elLive.innerHTML = '';
     elLive.innerHTML = START;
 }
 
-function renderSmiley(smiley){
+function renderSmiley(smiley) {
     var elLive = document.querySelector('.smiley');
     elLive.innerHTML = '';
     elLive.innerHTML += smiley;
