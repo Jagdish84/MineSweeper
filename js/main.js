@@ -52,6 +52,7 @@ function initGame() {
     gGame.markedCount = 0;
     gGame.totalNoMines = gLevel.size ** 2 - gLevel.mines;
     gGame.livesCount = 3;
+    gGame.safeCount = 3;
     gFirstCellClick = 0;
     clearTimer();
     clearScores()
@@ -91,7 +92,7 @@ function renderBoard(board) {
         for (var j = 0; j < gLevel.size; j++) {
             var cell = board[i][j];
             var cellToDisplay = getCellData(cell)
-            strHTML += `<td id = "placeholder" class ="cell${gLevel.size}" data-i="${i}" data-j="${j}" onclick="cellClicked(this)"
+            strHTML += `<td class ="cell${gLevel.size}" data-i="${i}" data-j="${j}" onclick="cellClicked(this)"
             oncontextmenu="cellMarked(event, this)">${cellToDisplay}</td>`;
         }
         strHTML += '</tr>\n';
@@ -385,29 +386,53 @@ function renderHighScore(level, score) {
     elScore.innerHTML = score.substring(0, 2) + ':' + score.substring(2, 4);
 }
 
-function resetSafeCells(safeLocations) {
-
+function resetSafeCells() {
     var elSafe = document.querySelector('.safeclick');
     elSafe.innerHTML = '';
-    elSafe.innerHTML += 'Safe Cells: <span class="safe1" onclick="renderSafeCells"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe2" onclick="renderSafeCells"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe3" onclick="renderSafeCells"><img src="./img/safe.png"alt="safe.png"/></span>';
+    elSafe.innerHTML += `Safe Cells: <span class="safe1" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe2" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe3" onclick="getSafeClick()"><img src="./img/safe.png"alt="safe.png"/></span> <div>Remaining Safe Clicks: <span>${gGame.safeCount}</span></div>`;
 }
 
+function getSafeClick() {
+    if (!gGame.safeCount) return;
+    var emptyLocations = getAllLocations();
+    if (!emptyLocations.length) return;
+    var rndCell = getRandomInt(0, emptyLocations.length - 1);
+    var rndLocation = emptyLocations[rndCell];
+
+    while (gBoard[rndLocation.i][rndLocation.j].isShown) {
+        emptyLocations.splice(rndCell, 1);
+        var rndCell = getRandomInteger(0, emptyLocations.length - 1);
+        var rndLocation = emptyLocations[rndCell];
+        if (!emptyLocations.length) return;
+    }
+    gBoard[rndLocation.i][rndLocation.j].isShown = true;
+    renderSafeCells();
+    // renderBoard(gBoard);
+
+    setTimeout(function () {
+        gBoard[rndLocation.i][rndLocation.j].isShown = false;
+        // renderBoard(gBoard);
+    }, 1000)
+
+}
+
+function getAllLocations() {
+    var locations = [];
+    for (var i = 0; i < gLevel.size; i++) {
+        for (var j = 0; j < gLevel.size; j++) {
+            var currCell = { i: i, j: j };
+            if (!gBoard[i][j].isMine) locations.push(currCell);
+        }
+    }
+    return locations;
+}
 
 function renderSafeCells() {
     var elSafe = document.querySelector(`.safe${gGame.safeCount}`);
     elSafe.remove();
+    var elSafeCount = document.querySelector('.safeclick div span');
+    console.log(elSafeCount);
     gGame.safeCount--;
-}
-
-function getSafeLocations(board) {
-    var locations = [];
-    for (var i = 0; i <= board.length + 1; i++) {
-        for (var j = 0; j <= board.length + 1; j++) {
-            var currCell = gBoard[i][j]
-            if (!currCell.isMine && !currCell.isShown && !currCell.isMarked) {
-                locations.push({ i, j });
-            }
-        }
-    }
-    return locations;
+    elSafeCount.innerHTML = gGame.safeCount;
+    renderBoard(gBoard);
 }

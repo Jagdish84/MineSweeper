@@ -18,10 +18,15 @@ h2 {
     margin: auto;
 }
 
-img {
+h2 img {
     width: 20px;
     height: 20px;
     padding: 5px;
+}
+
+.safeclick span img {
+    width: 35px;
+    height: 35spx;
 }
 
 footer {
@@ -85,10 +90,6 @@ li {
 
 .cell4:hover, .cell8:hover, .cell12:hover {
     background-color: lightcoral;
-}
-
-.levels {
-    margin-top: 20px;
 }
 
 .modal {
@@ -181,3 +182,4 @@ li {
     right: 40%;
     bottom: 5%;
 }
+
