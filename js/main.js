@@ -7,20 +7,30 @@ var START = '😃';
 var HITMINE = '😰';
 var WIN = '😎';
 
-var gTimerId;
+
 var gStartTime = Date.now()
 var gFirstCellClick = 0;
+var gTimeScore;
 
 var gLevel = {
     size: 4,
-    mines: 2,
-    highScore: 0
+    mines: 2
 }
+
+var gTime = {
+    min: Infinity,
+    sec: Infinity
+};
+
+var scoreStorage = window.localStorage;
+localStorage.setItem('beginner', Infinity);
+localStorage.setItem('medium', Infinity);
+localStorage.setItem('expert', Infinity);
+console.log(scoreStorage);
 
 var gTimer = {
     seconds: 0,
-    minutes: 0,
-    clearTime: -1
+    minutes: 0
 };
 
 var gGame = {
@@ -146,7 +156,6 @@ function cellClicked(elCell) {
         console.log(gGame.totalNoMines);
         renderBoard(gBoard);
     }
-
     checkGameOver();
 }
 
@@ -155,7 +164,7 @@ function cellMarked(event, elCell) {
     var j = +elCell.dataset.j;
     var elMarked = document.querySelector('.marked');
 
-    if(gBoard[i][j].isShown && !gBoard[i][j].isMarked) return;
+    if (gBoard[i][j].isShown && !gBoard[i][j].isMarked) return;
 
     if (!gBoard[i][j].isMarked) {
         gBoard[i][j].isMarked = true;
@@ -170,7 +179,6 @@ function cellMarked(event, elCell) {
     }
 
     event.preventDefault();
-    // if(gBoard[i][j].isShown) return;
     renderBoard(gBoard)
 }
 
@@ -239,6 +247,7 @@ function renderTimer() {
 
     var elTimer = document.querySelector('.timer');
     elTimer.innerHTML = `Timer: ${String(formattedMin)}:${formattedSec}`
+    gTimeScore = String(formattedMin) + formattedSec
 }
 
 function clearTimer() {
@@ -292,6 +301,7 @@ function getModal(showModal, isVictory) {
     if (isVictory) {
         document.querySelector('.game-over-txt').innerText = 'You Won ! ! !';
         renderSmiley(WIN);
+        checkHighScore(gLevel.size, gTimeScore);
     } else {
         document.querySelector('.game-over-txt').innerText = 'Game Over';
     }
@@ -349,4 +359,30 @@ function renderSmiley(smiley) {
     var elLive = document.querySelector('.smiley');
     elLive.innerHTML = '';
     elLive.innerHTML += smiley;
+}
+
+
+
+function checkHighScore(level, score) {
+    var currLevel = '';
+    if (level === 4) {
+        console.log('here');
+        currLevel = 'beginner';
+    } else if (level === 8) {
+        currLevel = 'medium';
+    } else {
+        currLevel = 'expert';
+    }
+    var currHighScore = localStorage.getItem(currLevel);
+    if (score < currHighScore) {
+        localStorage.setItem(`${currLevel}`, score);
+        console.log(scoreStorage);
+        renderHighScore(currLevel, score)
+    }
+}
+
+
+function renderHighScore(level, score) {
+    var elScore = document.querySelector(`.${level}-highscore span`);
+    elScore.innerHTML = score.substring(0, 2) + ':' + score.substring(2, 4);
 }

@@ -26,11 +26,11 @@ footer {
     top: 20px;
 }
 
-ul{
+ul {
     list-style-type: circle;
 }
 
-li{
+li {
     padding: 10px;
 }
 
@@ -137,12 +137,36 @@ li{
     width: 300px;
 }
 
-.high-scores{
+.high-scores {
     position: absolute;
+    display: inline-block;
     width: 170px;
     height: 200px;
-    bottom: 200px;
+    bottom: 50%;
+    left: 5%;
     border: 1px solid black;
     box-shadow: 2px 2px 15px -2px rgb(50, 50, 50);
     font-weight: bolder;
+    text-align: center;
+}
+
+.high-scores span {
+    padding-left: 10px;
+}
+
+.beginner-highscore {
+    position: absolute;
+    left: 20px;
+}
+
+.medium-highscore {
+    position: absolute;
+    margin-top: 50px;
+    left: 20px;
+}
+
+.expert-highscore {
+    position: absolute;
+    margin-top: 100px;
+    left: 20px;
 }
