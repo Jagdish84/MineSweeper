@@ -8,9 +8,8 @@
 </head>
 
 <body onload="initGame()">
-    <h1>Score Board</h1>
-    <h2>Current Score:</h2>
-    
+    <h1 class="smiley" onclick="initGame()"></h1>
+    <h2 class="lives-container"></h2>
 
     <div class="modal">
         <h2 class="game-over-txt"></h2>
@@ -19,7 +18,8 @@
         <tbody class="board"></tbody>
     </table>
 
-    <div><h3 class="timer"><span></span></h3>
+    <div>
+        <h3 class="timer"></h3>
         <span class="marked"></span> <span class="shown"></span>
     </div>
 
@@ -30,5 +30,7 @@
 </body>
 
 <script src="js/main.js"></script>
+
+<footer>Ofir Picciotto ©️ </footer>
 
 </html>
