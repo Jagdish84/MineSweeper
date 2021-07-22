@@ -13,7 +13,8 @@ var gFirstCellClick = 0;
 
 var gLevel = {
     size: 4,
-    mines: 2
+    mines: 2,
+    highScore: 0
 }
 
 var gTimer = {
@@ -165,6 +166,7 @@ function cellMarked(event, elCell) {
         elMarked.innerHTML = `Marked Cells: ${gGame.markedCount}`;
         gBoard[i][j].isShown = false;
     }
+    
     event.preventDefault();
     renderBoard(gBoard)
 }
@@ -255,11 +257,11 @@ function getCellData(cell) {
     if (!cell.isShown) {
         return EMPTY;
     }
-    if (cell.isMine) {
-        return MINE;
-    }
     if (cell.isMarked) {
         return FLAG;
+    }
+    if (cell.isMine) {
+        return MINE;
     }
     else {
         return cell.minesAroundCount

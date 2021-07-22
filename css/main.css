@@ -26,6 +26,14 @@ footer {
     top: 20px;
 }
 
+ul{
+    list-style-type: circle;
+}
+
+li{
+    padding: 10px;
+}
+
 .cell4 {
     background-color: gray;
     box-shadow: 2px 2px 15px -2px rgb(50, 50, 50);
@@ -127,4 +135,14 @@ footer {
     top: 330px;
     right: 100px;
     width: 300px;
+}
+
+.high-scores{
+    position: absolute;
+    width: 170px;
+    height: 200px;
+    bottom: 200px;
+    border: 1px solid black;
+    box-shadow: 2px 2px 15px -2px rgb(50, 50, 50);
+    font-weight: bolder;
 }
