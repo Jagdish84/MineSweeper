@@ -26,7 +26,6 @@ var scoreStorage = window.localStorage;
 localStorage.setItem('beginner', Infinity);
 localStorage.setItem('medium', Infinity);
 localStorage.setItem('expert', Infinity);
-console.log(scoreStorage);
 
 var gTimer = {
     seconds: 0,
@@ -39,6 +38,7 @@ var gGame = {
     shownCount: 0,
     markedCount: 0,
     livesCount: 3,
+    safeCount: 3,
     secsPassed: 0,
     timerInterval: 0
 }
@@ -57,6 +57,7 @@ function initGame() {
     clearScores()
     resetLives();
     resetSmiley();
+    resetSafeCells()
     gBoard = buildBoard();
     renderBoard(gBoard);
     getModal(false, false);
@@ -330,7 +331,6 @@ function getEmptyNegsLocations(pos) {
             var currCell = gBoard[i][j]
             if (currCell.minesAroundCount === 0 && !currCell.isMine && !currCell.isShown && !currCell.isMarked) {
                 locations.push({ i, j });
-
             }
         }
     }
@@ -351,7 +351,6 @@ function renderLives() {
 
 function resetSmiley() {
     var elLive = document.querySelector('.smiley');
-    // elLive.innerHTML = '';
     elLive.innerHTML = START;
 }
 
@@ -381,8 +380,34 @@ function checkHighScore(level, score) {
     }
 }
 
-
 function renderHighScore(level, score) {
     var elScore = document.querySelector(`.${level}-highscore span`);
     elScore.innerHTML = score.substring(0, 2) + ':' + score.substring(2, 4);
+}
+
+function resetSafeCells(safeLocations) {
+
+    var elSafe = document.querySelector('.safeclick');
+    elSafe.innerHTML = '';
+    elSafe.innerHTML += 'Safe Cells: <span class="safe1" onclick="renderSafeCells"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe2" onclick="renderSafeCells"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe3" onclick="renderSafeCells"><img src="./img/safe.png"alt="safe.png"/></span>';
+}
+
+
+function renderSafeCells() {
+    var elSafe = document.querySelector(`.safe${gGame.safeCount}`);
+    elSafe.remove();
+    gGame.safeCount--;
+}
+
+function getSafeLocations(board) {
+    var locations = [];
+    for (var i = 0; i <= board.length + 1; i++) {
+        for (var j = 0; j <= board.length + 1; j++) {
+            var currCell = gBoard[i][j]
+            if (!currCell.isMine && !currCell.isShown && !currCell.isMarked) {
+                locations.push({ i, j });
+            }
+        }
+    }
+    return locations;
 }
