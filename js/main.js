@@ -408,7 +408,7 @@ function getSafeClick() {
 
     setTimeout(function () {
         gBoard[rndLocation.i][rndLocation.j].isShown = false;
-        // renderBoard(gBoard);
+        renderBoard(gBoard);
     }, 1000)
 
 }
