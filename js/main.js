@@ -17,11 +17,6 @@ var gLevel = {
     mines: 2
 }
 
-var gTime = {
-    min: Infinity,
-    sec: Infinity
-};
-
 var scoreStorage = window.localStorage;
 localStorage.setItem('beginner', Infinity);
 localStorage.setItem('medium', Infinity);
@@ -300,12 +295,14 @@ function getModal(showModal, isVictory) {
         document.querySelector('.modal').style.visibility = "hidden";
     }
 
-    if (isVictory) {
-        document.querySelector('.game-over-txt').innerText = 'You Won ! ! !';
+    if (isVictory && checkHighScore(gLevel.size, gTimeScore) === true) {
+        document.querySelector('.game-over-txt').innerHTML = '<br/> You Won ! ! ! <br/> WITH A NEW RECORD!';
         renderSmiley(WIN);
-        checkHighScore(gLevel.size, gTimeScore);
+    } else if (isVictory) {
+        document.querySelector('.game-over-txt').innerHTML = '<br/> You Won ! ! !';
+        renderSmiley(WIN);
     } else {
-        document.querySelector('.game-over-txt').innerText = 'Game Over';
+        document.querySelector('.game-over-txt').innerHTML = '<br/> Game Over';
     }
 
 }
@@ -366,7 +363,6 @@ function renderSmiley(smiley) {
 function checkHighScore(level, score) {
     var currLevel = '';
     if (level === 4) {
-        console.log('here');
         currLevel = 'beginner';
     } else if (level === 8) {
         currLevel = 'medium';
@@ -376,9 +372,10 @@ function checkHighScore(level, score) {
     var currHighScore = localStorage.getItem(currLevel);
     if (score < currHighScore) {
         localStorage.setItem(`${currLevel}`, score);
-        console.log(scoreStorage);
         renderHighScore(currLevel, score)
+        return true;
     }
+    return false;
 }
 
 function renderHighScore(level, score) {
