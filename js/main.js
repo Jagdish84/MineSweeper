@@ -190,19 +190,6 @@ function checkGameOver() {
     }
 }
 
-function countNegsAround(position, board) {
-    var count = 0;
-    for (var i = position.i - 1; i <= position.i + 1; i++) {
-        if (i >= board.length || i < 0) continue
-        for (var j = position.j - 1; j <= position.j + 1; j++) {
-            if (j >= board.length || j < 0) continue
-            if (board[i][j].isMine) count++;
-        }
-    }
-    return count;
-}
-
-
 function changeLevel(num) {
     gLevel.size = num;
     if (num === 4) {
@@ -242,14 +229,14 @@ function renderTimer() {
         formattedMin = String(gTimer.minutes);
     }
 
-    var elTimer = document.querySelector('.timer');
-    elTimer.innerHTML = `Timer: ${String(formattedMin)}:${formattedSec}`
+    var elTimer = document.querySelector('.timer span');
+    elTimer.innerHTML = `${String(formattedMin)}:${formattedSec}`
     gTimeScore = String(formattedMin) + formattedSec
 }
 
 function clearTimer() {
-    var elTimer = document.querySelector('.timer');
-    elTimer.innerHTML = '';
+    var elTimer = document.querySelector('.timer span');
+    elTimer.innerHTML = '00:00';
     gTimer.seconds = 0;
     gTimer.minutes = 0;
     clearInterval(gGame.timerInterval);
@@ -319,6 +306,18 @@ function showMines(board) {
     renderBoard(board)
 }
 
+function countNegsAround(position, board) {
+    var count = 0;
+    for (var i = position.i - 1; i <= position.i + 1; i++) {
+        if (i >= board.length || i < 0) continue
+        for (var j = position.j - 1; j <= position.j + 1; j++) {
+            if (j >= board.length || j < 0) continue
+            if (board[i][j].isMine) count++;
+        }
+    }
+    return count;
+}
+
 function getEmptyNegsLocations(pos) {
     var locations = [];
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
@@ -358,8 +357,6 @@ function renderSmiley(smiley) {
     elLive.innerHTML += smiley;
 }
 
-
-
 function checkHighScore(level, score) {
     var currLevel = '';
     if (level === 4) {
@@ -386,7 +383,7 @@ function renderHighScore(level, score) {
 function resetSafeCells() {
     var elSafe = document.querySelector('.safeclick');
     elSafe.innerHTML = '';
-    elSafe.innerHTML += `Safe Cells: <span class="safe1" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe2" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe3" onclick="getSafeClick()"><img src="./img/safe.png"alt="safe.png"/></span> <div>Remaining Safe Clicks: <span>${gGame.safeCount}</span></div>`;
+    elSafe.innerHTML += `Safe Clicks: <span class="safe1" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe2" onclick="getSafeClick()"><img src="./img/safe.png" alt="safe.png"></span> <span class="safe3" onclick="getSafeClick()"><img src="./img/safe.png"alt="safe.png"/></span> <div>Remaining Safe Clicks: <span>${gGame.safeCount}</span></div>`;
 }
 
 function getSafeClick() {

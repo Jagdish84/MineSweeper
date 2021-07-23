@@ -24,6 +24,22 @@ h2 img {
     padding: 5px;
 }
 
+h3 {
+    border: 1px solid blanchedalmond;
+    box-shadow: 2px 2px 15px -2px blanchedalmond;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.safeclick {
+    border: 1px solid blanchedalmond;
+    box-shadow: 2px 2px 15px -2px blanchedalmond;
+    font-weight: bolder;
+    text-align: center;
+    width: 200px;
+    padding-bottom: 5px;
+}
+
 .safeclick span img {
     width: 35px;
     height: 35spx;
@@ -42,7 +58,7 @@ li {
     padding: 10px;
 }
 
-.cell4{
+.cell4 {
     background-color: gray;
     box-shadow: 2px 2px 15px -2px blanchedalmond;
     width: 100px;
@@ -122,24 +138,26 @@ li {
 .timer {
     position: absolute;
     top: 250px;
-    right: 100px;
-    width: 300px;
+    right: 150px;
+    width: 200px;
 }
 
 .shown {
     position: absolute;
     display: inline-block;
     top: 320px;
-    right: 100px;
+    right: 108px;
     width: 300px;
+    font-weight: bolder;
 }
 
 .marked {
     position: absolute;
     display: inline-block;
     top: 350px;
-    right: 100px;
+    right: 103px;
     width: 300px;
+    font-weight: bolder;
 }
 
 .high-scores {
@@ -182,4 +200,3 @@ li {
     right: 40%;
     bottom: 5%;
 }
-
