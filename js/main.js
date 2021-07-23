@@ -135,10 +135,9 @@ function cellClicked(elCell) {
                 elShown.innerHTML = `Shown Cells: ${gGame.shownCount}`;
                 renderBoard(gBoard);
             }
-            // currCell.isShown = true;
-
         }
     }
+    
     // console.log(gGame.totalNoMines);
     if (!currCell.isShown) {
         currCell.isShown = true;
