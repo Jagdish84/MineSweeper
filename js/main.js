@@ -326,7 +326,7 @@ function getEmptyNegsLocations(pos) {
             if (j >= gLevel.size || j < 0) continue;
             if (i === pos.i && j === pos.j) continue;
             var currCell = gBoard[i][j]
-            if (currCell.minesAroundCount === 0 && !currCell.isMine && !currCell.isShown && !currCell.isMarked) {
+            if (currCell.minesAroundCount >= 0 && !currCell.isMine && !currCell.isShown && !currCell.isMarked) {
                 locations.push({ i, j });
             }
         }
