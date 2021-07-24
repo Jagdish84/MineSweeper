@@ -10,9 +10,9 @@ table {
     margin-top: -75px;
 }
 
-button{
-background-color: #FFA900;
-box-shadow: 2px 2px 15px -2px #FFA900;
+button {
+    background-color: #FFA900;
+    box-shadow: 2px 2px 15px -2px #FFA900;
 }
 
 h1 {
@@ -47,7 +47,7 @@ h3 {
 
 .safeclick span img {
     width: 35px;
-    height: 35spx;
+    height: 35px;
 }
 
 footer {
@@ -206,4 +206,24 @@ li {
     right: 40%;
     bottom: 5%;
     padding-left: 3px;
+}
+
+.hints {
+    padding-top: 3px;
+    position: absolute;
+    display: inline-block;
+    bottom: 160px;
+    left: 3%;
+    border: 1px solid #CD113B;
+    box-shadow: 2px 2px 15px -2px #CD113B;
+    font-weight: bolder;
+    text-align: center;
+    width: 200px;
+    padding-bottom: 5px;
+}
+
+.hints img {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
 }
