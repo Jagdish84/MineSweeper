@@ -59,7 +59,7 @@ li {
 }
 
 .cell4 {
-    background-color: gray;
+    background-color: darkslategray;
     box-shadow: 2px 2px 15px -2px blanchedalmond;
     width: 100px;
     height: 100px;
@@ -75,7 +75,7 @@ li {
 }
 
 .cell8 {
-    background-color: gray;
+    background-color: darkslategray;
     box-shadow: 2px 2px 15px -2px blanchedalmond;
     width: 50px;
     height: 48px;
@@ -90,7 +90,7 @@ li {
 }
 
 .cell12 {
-    background-color: gray;
+    background-color: darkslategray;
     box-shadow: 2px 2px 15px -2px blanchedalmond;
     width: 32px;
     height: 32px;
