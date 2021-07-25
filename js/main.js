@@ -412,6 +412,7 @@ function checkHighScore(level, score) {
     if (score < currHighScore) {
         localStorage.setItem(`${currLevel}`, score);
         renderHighScore(currLevel, score)
+        // console.log(scoreStorage);
         return true;
     }
     return false;
@@ -479,8 +480,10 @@ function changeBgnColor(cells) {
         // console.log(elCell);
         if (gBoard[cells[i].i][cells[i].j].isMine) {
             elCell.style.backgroundColor = 'red';
+            elCell.style.boxShadow = "2px 2px 15px -2px #CD113B";
         } else {
             elCell.style.backgroundColor = 'gray';
+            elCell.style.boxShadow = "2px 2px 15px -2px #CD113B";
         }
     }
 }

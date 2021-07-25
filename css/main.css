@@ -11,6 +11,7 @@ table {
 }
 
 button {
+    cursor: pointer;
     background-color: #FFA900;
     box-shadow: 2px 2px 15px -2px #FFA900;
 }
@@ -37,6 +38,7 @@ h3 {
 }
 
 .safeclick {
+    cursor: pointer;
     border: 1px solid #CD113B;
     box-shadow: 2px 2px 15px -2px #CD113B;
     font-weight: bolder;
@@ -64,8 +66,9 @@ li {
 }
 
 .cell4 {
+    cursor: pointer;
     background-color: darkslategray;
-    box-shadow: 2px 2px 15px -2px #CD113B;
+    box-shadow: inset 2px 2px 15px 14px #cd113b;;
     width: 100px;
     height: 100px;
     font-size: 15px;
@@ -80,8 +83,9 @@ li {
 }
 
 .cell8 {
+    cursor: pointer;
     background-color: darkslategray;
-    box-shadow: 2px 2px 15px -2px #CD113B;
+    box-shadow: inset 2px 2px 15px 14px #cd113b;;
     width: 50px;
     height: 48px;
     font-size: 15px;
@@ -95,8 +99,9 @@ li {
 }
 
 .cell12 {
+    cursor: pointer;
     background-color: darkslategray;
-    box-shadow: 2px 2px 15px -2px #CD113B;
+    box-shadow: inset 2px 2px 15px 14px #cd113b;;
     width: 32px;
     height: 32px;
     font-size: 15px;
@@ -209,6 +214,7 @@ li {
 }
 
 .hints {
+    cursor: pointer;
     padding-top: 3px;
     position: fixed;
     display: inline-block;
