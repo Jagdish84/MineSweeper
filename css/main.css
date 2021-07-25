@@ -210,10 +210,10 @@ li {
 
 .hints {
     padding-top: 3px;
-    position: absolute;
+    position: fixed;
     display: inline-block;
     bottom: 160px;
-    left: 3%;
+    left: 3.5%;
     border: 1px solid #CD113B;
     box-shadow: 2px 2px 15px -2px #CD113B;
     font-weight: bolder;
