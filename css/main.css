@@ -101,7 +101,7 @@ li {
 .cell12 {
     cursor: pointer;
     background-color: darkslategray;
-    box-shadow: inset 2px 2px 15px 14px #cd113b;;
+    box-shadow: inset 2px 2px 15px 14px #cd113b;
     width: 32px;
     height: 32px;
     font-size: 15px;
@@ -116,6 +116,8 @@ li {
 
 .cell4:hover, .cell8:hover, .cell12:hover {
     background-color: #FF7600;
+    box-shadow: 2px 2px 15px 14px #cd113b;
+
 }
 
 .modal {
